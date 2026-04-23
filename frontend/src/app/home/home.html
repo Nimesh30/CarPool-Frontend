@@ -1,0 +1,172 @@
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">RideConnect</div>
+  <div class="nav-links">
+
+    <!-- Show Dashboard + Logout when logged in -->
+    <ng-container *ngIf="isLoggedIn">
+      <a href="#">Dashboard</a>
+      <a href="#" class="logout" (click)="logout(); $event.preventDefault()">
+        <span class="logout-icon">&#x2192;</span> Logout
+      </a>
+    </ng-container>
+
+    <!-- Show Login + Register when logged out -->
+    <ng-container *ngIf="!isLoggedIn">
+      <a routerLink="login" routerLinkActive="active" class="login-btn" (click)="login(); $event.preventDefault()">
+        Login
+      </a>
+      <a routerLink="register" routerLinkActive="active" class="register-btn" (click)="$event.preventDefault()">
+        Register
+      </a>
+    </ng-container>
+
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Share Rides,<br />Save Money 🚗</h1>
+    <p class="hero-subtitle">Connect with drivers heading your way. Book a seat<br />or share your car.</p>
+
+    <!-- SEARCH CARD -->
+    <div class="search-card">
+      <div class="search-row">
+        <div class="input-wrapper">
+          <span class="icon green">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </span>
+          <input type="text" placeholder="From (e.g. Ahmedabad)" />
+        </div>
+        <div class="input-wrapper">
+          <span class="icon orange">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </span>
+          <input type="text" placeholder="To (e.g. Palanpur)" />
+        </div>
+      </div>
+
+      <div class="date-row">
+        <input type="date" class="date-input" />
+      </div>
+
+      <button class="find-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        Find a Ride
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features">
+  <div class="feature-card">
+    <div class="feature-icon green-bg">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+    </div>
+    <h3>Find a Ride</h3>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon orange-bg">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13" rx="2" />
+        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+        <circle cx="5.5" cy="18.5" r="2.5" />
+        <circle cx="18.5" cy="18.5" r="2.5" />
+      </svg>
+    </div>
+    <h3>Share a Ride</h3>
+  </div>
+</section>
+
+<!-- HOW IT WORKS SECTION -->
+<section class="how-it-works">
+  <h2 class="section-title">How It Works</h2>
+  <div class="steps-row">
+
+    <div class="step">
+      <div class="step-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13" rx="2" />
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+          <circle cx="5.5" cy="18.5" r="2.5" />
+          <circle cx="18.5" cy="18.5" r="2.5" />
+        </svg>
+      </div>
+      <h4>Driver Posts Journey</h4>
+      <p>Add route, stops, time &amp; seats</p>
+    </div>
+
+    <div class="step">
+      <div class="step-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </div>
+      <h4>User Searches Ride</h4>
+      <p>Find rides with real-time seat info</p>
+    </div>
+
+    <div class="step">
+      <div class="step-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      </div>
+      <h4>Book &amp; Go!</h4>
+      <p>Book any segment, driver confirms</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SMART SEAT SYSTEM SECTION -->
+<section class="smart-seat-section">
+  <div class="smart-seat-card">
+    <div class="smart-seat-title">
+      <span class="seat-emoji">🪑</span>
+      <h2>Smart Seat System</h2>
+    </div>
+    <p class="smart-seat-desc">
+      Booking Ahmedabad → Mehsana frees Mehsana → Palanpur seats for others!
+    </p>
+    <div class="route-pills">
+      <span class="pill green-pill">Ahmedabad</span>
+      <span class="arrow-icon">→</span>
+      <span class="stop-label">Mehsana</span>
+      <span class="arrow-icon">→</span>
+      <span class="pill orange-pill">Palanpur</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-logo">RideConnect</p>
+  <p class="footer-tagline">Share rides. Save money. Travel together.</p>
+</footer>
