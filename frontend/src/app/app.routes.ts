@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
-import { Home } from './home/home';
-import { Register } from './Auth/register/register';
-import { Login } from './Auth/login/login';
+import { Home } from './Pages/home/home';
+import { Register } from './Pages/Auth/register/register';
+import { Login } from './Pages/Auth/login/login';
+import { SearchedJobs } from './Pages/searched-jobs/searched-jobs';
 
-export const routes: Routes = [   // ✅ MUST be exported
+export const routes: Routes = [
+  // ✅ MUST be exported
   { path: '', component: Home },
   { path: 'register', component: Register },
-  { path: 'login', component: Login }
+  { path: 'login', component: Login },
+  { path: 'search', component: SearchedJobs },
 ];

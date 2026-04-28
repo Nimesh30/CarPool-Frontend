@@ -1,0 +1,24 @@
+<h2>Search Ride</h2>
+
+<div *ngIf="rides.length > 0; else noData">
+
+  <div *ngFor="let ride of rides" class="card">
+    <h3>{{ ride.startLocation }} → {{ ride.endLocation }}</h3>
+
+    <p>Date: {{ ride.date }}</p>
+    <p>Time: {{ ride.departureTime }}</p>
+
+    <p>Driver: {{ ride.driverName }}</p>
+    <p>Car: {{ ride.carName }} ({{ ride.numberPlate }})</p>
+
+    <p>Price: ₹{{ ride.price }}</p>
+    <p>Seats: {{ ride.availableSeats }}</p>
+
+    <p>Stops: {{ ride.stops?.join(', ') }}</p>
+  </div>
+
+</div>
+
+<ng-template #noData>
+  <p>No rides found</p>
+</ng-template>
