@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { PassengerService } from '../../services/passenger-service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-searched-jobs',
@@ -11,32 +13,19 @@ import { CommonModule } from '@angular/common';
 export class SearchedJobs {
   rides: any[] = [];
 
-  constructor(private passengerService: PassengerService) {}
+  constructor(
+    private passengerService: PassengerService,
+    private router: Router,
+    private cdr:ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
-    const data = history.state.searchData;
+    const data = history.state?.searchData;
 
     if (data) {
       this.fetchRides(data);
     } else {
       console.warn('No search data found');
-
-      // 👇 optional dummy data (for testing without backend)
-      this.rides = [
-        {
-          journeyId: 1,
-          startLocation: 'Ahmedabad',
-          endLocation: 'Palanpur',
-          date: '2026-04-28',
-          departureTime: '08:30',
-          price: 350,
-          availableSeats: 3,
-          stops: ['Mehsana'],
-          driverName: 'Ravi Patel',
-          carName: 'Swift',
-          numberPlate: 'GJ01AB1234'
-        }
-      ];
     }
   }
 
@@ -44,7 +33,7 @@ export class SearchedJobs {
     this.passengerService.searchRides(data).subscribe({
       next: (res: any) => {
         this.rides = res.data || res;
-        console.log('Rides:', this.rides);
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error:', err);

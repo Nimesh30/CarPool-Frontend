@@ -20,16 +20,21 @@ export class Authservice {
 //   });
 // }
 
-  login(data: any){
+  login(data: any) {
     return this.http.post(`${this.baseUrl}/login`, data).pipe(
       tap((res: any) => {
-        // ✅ Store in sessionStorage (or localStorage)
-        sessionStorage.setItem('user', JSON.stringify(res));
+        console.log(res);
+        //  Store tokens separately
+        localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('refreshToken', res.data.refreshToken);
 
-        // 👉 if token exists
-        if (res.token) {
-          sessionStorage.setItem('token', res.token);
-        }
+        //  Store only required user info
+        localStorage.setItem('user', JSON.stringify({
+          id: res.data.userId,
+          email: res.data.email,
+          role: res.data.role
+        }));
+
       })
     );
   }

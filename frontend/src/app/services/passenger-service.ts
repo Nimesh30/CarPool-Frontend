@@ -6,12 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PassengerService {
-  private apiUrl = 'http://localhost:8081/api/passenger';
+  private apiUrl = 'http://localhost:8081/passenger/search';
   
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient){
+    console.log("in passanger search API contructor")
+  }
 
   searchRides(data: any): Observable<any> {
-    const token = localStorage.getItem('token'); // your JWT
+    console.log("in passanger search API ",data)
+
+    const token = localStorage.getItem('accessToken'); // your JWT
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`

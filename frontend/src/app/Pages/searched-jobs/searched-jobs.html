@@ -1,20 +1,29 @@
 <h2>Search Ride</h2>
 
-<div *ngIf="rides.length > 0; else noData">
+<p>Total rides: {{ rides?.length || 0 }}</p>
+
+<div *ngIf="rides && rides.length > 0; else noData">
 
   <div *ngFor="let ride of rides" class="card">
-    <h3>{{ ride.startLocation }} → {{ ride.endLocation }}</h3>
+    
+    <h3>{{ ride?.startLocation }} → {{ ride?.endLocation }}</h3>
 
-    <p>Date: {{ ride.date }}</p>
-    <p>Time: {{ ride.departureTime }}</p>
+    <p><strong>Date:</strong> {{ ride?.date }}</p>
+    <p><strong>Time:</strong> {{ ride?.departureTime }}</p>
 
-    <p>Driver: {{ ride.driverName }}</p>
-    <p>Car: {{ ride.carName }} ({{ ride.numberPlate }})</p>
+    <p><strong>Driver:</strong> {{ ride?.driverName }}</p>
+    <p>
+      <strong>Car:</strong> {{ ride?.carName }} ({{ ride?.numberPlate }})
+    </p>
 
-    <p>Price: ₹{{ ride.price }}</p>
-    <p>Seats: {{ ride.availableSeats }}</p>
+    <p><strong>Price:</strong> ₹{{ ride?.price }}</p>
+    <p><strong>Seats:</strong> {{ ride?.availableSeats }}</p>
 
-    <p>Stops: {{ ride.stops?.join(', ') }}</p>
+    <!-- FIXED: safe check -->
+    <p *ngIf="ride?.stops && ride.stops.length > 0">
+      <strong>Stops:</strong> {{ ride.stops.join(', ') }}
+    </p>
+
   </div>
 
 </div>
