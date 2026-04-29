@@ -1,25 +1,52 @@
-<h2>Book Ride</h2>
+<div class="modal">
 
-<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+  <h2>Book Your Seat</h2>
 
-  <label>Pickup Point</label>
-  <input type="text" formControlName="pickupPoint">
-  <div *ngIf="bookingForm.get('pickupPoint')?.touched && bookingForm.get('pickupPoint')?.invalid">
-    Pickup is required
+  <!-- Ride Info -->
+  <div class="ride-card">
+    <h3>{{ rideData?.pickupPoint }} → {{ rideData?.dropPoint }}</h3>
+    <p>{{ rideData?.date }} • {{ rideData?.departureTime }}</p>
+    <p class="price">₹{{ rideData?.price }} per seat</p>
   </div>
 
-  <label>Drop Point</label>
-  <input type="text" formControlName="dropPoint">
-  <div *ngIf="bookingForm.get('dropPoint')?.touched && bookingForm.get('dropPoint')?.invalid">
-    Drop is required
-  </div>
+  <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
 
-  <label>Seats</label>
-  <input type="number" formControlName="seats" min="1">
-  <div *ngIf="bookingForm.get('seats')?.touched && bookingForm.get('seats')?.invalid">
-    Minimum 1 seat required
-  </div>
+    <!-- Pickup -->
+    <label>Pickup Point</label>
+    <input type="text" formControlName="pickupPoint">
+    <div class="error" *ngIf="bookingForm.get('pickupPoint')?.touched && bookingForm.get('pickupPoint')?.invalid">
+      Pickup is required
+    </div>
 
-  <button type="submit">Confirm Booking</button>
+    <!-- Drop -->
+    <label>Drop Point</label>
+    <input type="text" formControlName="dropPoint">
+    <div class="error" *ngIf="bookingForm.get('dropPoint')?.touched && bookingForm.get('dropPoint')?.invalid">
+      Drop is required
+    </div>
 
-</form>
+    <!-- Seats -->
+    <label>Number of Seats</label>
+
+    <div class="seat-control">
+      <button type="button" (click)="decrease()">-</button>
+      <span>{{ bookingForm.value.seats }}</span>
+      <button type="button" (click)="increase()">+</button>
+    </div>
+
+    <p class="available">
+      {{ rideData?.availableSeats }} seats available
+    </p>
+
+    <!-- Total -->
+    <div class="total">
+      Total: ₹{{ bookingForm.value.seats * (rideData?.price || 0) }}
+    </div>
+
+    <button type="submit" class="confirm-btn" [disabled]="bookingForm.invalid">
+      Confirm Booking
+    </button>
+
+  </form>
+
+</div>

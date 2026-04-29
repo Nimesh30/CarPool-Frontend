@@ -25,6 +25,11 @@ export class BookRide {
       dropPoint: ['', Validators.required],
       seats: [1, [Validators.required, Validators.min(1)]],
     });
+
+    this.bookingForm.patchValue({
+      pickupPoint: this.rideData?.pickupPoint,
+      dropPoint: this.rideData?.dropPoint,
+    });
   }
 
   onSubmit() {
@@ -44,5 +49,22 @@ export class BookRide {
         console.error(err);
       },
     });
+  }
+
+  increase() {
+    const current = this.bookingForm.value.seats;
+    const max = this.rideData?.availableSeats || 5;
+
+    if (current < max) {
+      this.bookingForm.patchValue({ seats: current + 1 });
+    }
+  }
+
+  decrease() {
+    const current = this.bookingForm.value.seats;
+
+    if (current > 1) {
+      this.bookingForm.patchValue({ seats: current - 1 });
+    }
   }
 }
