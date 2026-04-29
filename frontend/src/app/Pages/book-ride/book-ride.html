@@ -1,0 +1,25 @@
+<h2>Book Ride</h2>
+
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+
+  <label>Pickup Point</label>
+  <input type="text" formControlName="pickupPoint">
+  <div *ngIf="bookingForm.get('pickupPoint')?.touched && bookingForm.get('pickupPoint')?.invalid">
+    Pickup is required
+  </div>
+
+  <label>Drop Point</label>
+  <input type="text" formControlName="dropPoint">
+  <div *ngIf="bookingForm.get('dropPoint')?.touched && bookingForm.get('dropPoint')?.invalid">
+    Drop is required
+  </div>
+
+  <label>Seats</label>
+  <input type="number" formControlName="seats" min="1">
+  <div *ngIf="bookingForm.get('seats')?.touched && bookingForm.get('seats')?.invalid">
+    Minimum 1 seat required
+  </div>
+
+  <button type="submit">Confirm Booking</button>
+
+</form>

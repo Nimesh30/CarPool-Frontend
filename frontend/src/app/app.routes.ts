@@ -3,6 +3,7 @@ import { Home } from './Pages/home/home';
 import { Register } from './Pages/Auth/register/register';
 import { Login } from './Pages/Auth/login/login';
 import { SearchedJobs } from './Pages/searched-jobs/searched-jobs';
+import { BookRide } from './Pages/book-ride/book-ride';
 
 export const routes: Routes = [
   // ✅ MUST be exported
@@ -10,4 +11,5 @@ export const routes: Routes = [
   { path: 'register', component: Register },
   { path: 'login', component: Login },
   { path: 'search', component: SearchedJobs },
+  { path: 'book-ride', component: BookRide },
 ];

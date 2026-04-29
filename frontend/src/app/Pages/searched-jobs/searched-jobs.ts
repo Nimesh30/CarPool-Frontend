@@ -16,8 +16,8 @@ export class SearchedJobs {
   constructor(
     private passengerService: PassengerService,
     private router: Router,
-    private cdr:ChangeDetectorRef
-  ) { }
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     const data = history.state?.searchData;
@@ -37,7 +37,13 @@ export class SearchedJobs {
       },
       error: (err) => {
         console.error('Error:', err);
-      }
+      },
+    });
+  }
+
+  bookRide(ride: any) {
+    this.router.navigate(['/book-ride'], {
+      state: { rideData: ride },
     });
   }
 }
