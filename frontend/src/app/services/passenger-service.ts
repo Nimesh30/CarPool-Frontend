@@ -30,6 +30,19 @@ export class PassengerService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.post(`http://localhost:8081/passenger/book/${journeyId}`, data,{ headers });
+    return this.http.post(`http://localhost:8081/passenger/book/${journeyId}`, data, { headers });
+  }
+
+  getMyBookings() {
+    const token = localStorage.getItem('accessToken'); // your JWT
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get(`http://localhost:8081/passenger/mybookings`, { headers });
+  }
+
+  cancelBooking(bookingId: string): Observable<any> {
+    return this.http.put(`http://localhost:8081/api/bookings/cancel/${bookingId}`, {});
   }
 }

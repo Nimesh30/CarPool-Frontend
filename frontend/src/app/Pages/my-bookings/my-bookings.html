@@ -1,0 +1,62 @@
+<h2 class="title">My Bookings</h2>
+
+<div *ngIf="bookings.length > 0; else noData" class="booking-container">
+
+  <div *ngFor="let b of bookings" class="card">
+
+    <!-- Route -->
+    <div class="route">
+      <span>{{ b.startLocation }}</span>
+      <span class="arrow">→</span>
+      <span>{{ b.endLocation }}</span>
+    </div>
+
+    <!-- Date + Time -->
+    <div class="row">
+      <span>📅 {{ b.travelDate }}</span>
+      <span>⏰ {{ b.departureTime }}</span>
+    </div>
+
+    <!-- Pickup & Drop -->
+    <div class="row">
+      <span>📍 {{ b.pickupPoint }}</span>
+      <span>🏁 {{ b.dropPoint }}</span>
+    </div>
+
+    <!-- Driver Info -->
+    <div class="row">
+      <span>👤 {{ b.driverName }}</span>
+      <span>🚗 {{ b.carName }}</span>
+    </div>
+
+    <!-- Price & Seats -->
+    <div class="row">
+      <span>💺 Seats: {{ b.seatsBooked }}</span>
+      <span>💰 ₹{{ b.totalPrice }}</span>
+    </div>
+
+    <!-- Status -->
+    <div class="status">
+      <span [ngClass]="{
+          'pending': b.bookingStatus === 'PENDING',
+          'confirmed': b.bookingStatus === 'CONFIRMED',
+          'cancelled': b.bookingStatus === 'CANCELLED'
+        }">
+        {{ b.bookingStatus }}
+      </span>
+    </div>
+
+    <div class="actions">
+      <button *ngIf="b.bookingStatus === 'PENDING' || b.bookingStatus === 'CONFIRMED'"
+        (click)="cancelBooking(b.bookingId)" class="cancel-btn">
+        Cancel Booking
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #noData>
+  <p class="no-data">No bookings found 🚫</p>
+</ng-template>

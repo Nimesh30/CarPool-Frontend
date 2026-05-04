@@ -6,19 +6,19 @@ import { tap } from 'rxjs/internal/operators/tap';
   providedIn: 'root',
 })
 export class Authservice {
-    private baseUrl = 'http://localhost:8081/api/auth'; // change if needed
+  private baseUrl = 'http://localhost:8081/api/auth'; // change if needed
 
   constructor(private http: HttpClient) {}
 
-  register(user: UserDTO){
+  register(user: UserDTO) {
     return this.http.post(`${this.baseUrl}/register`, user);
   }
 
-//   login(data: any) {
-//   return this.http.post('http://localhost:8081/api/auth/login', data, {
-//     responseType: 'text'
-//   });
-// }
+  //   login(data: any) {
+  //   return this.http.post('http://localhost:8081/api/auth/login', data, {
+  //     responseType: 'text'+
+  //   });
+  // }
 
   login(data: any) {
     return this.http.post(`${this.baseUrl}/login`, data).pipe(
@@ -29,13 +29,15 @@ export class Authservice {
         localStorage.setItem('refreshToken', res.data.refreshToken);
 
         //  Store only required user info
-        localStorage.setItem('user', JSON.stringify({
-          id: res.data.userId,
-          email: res.data.email,
-          role: res.data.role
-        }));
-
-      })
+        localStorage.setItem(
+          'user',
+          JSON.stringify({
+            id: res.data.userId,
+            email: res.data.email,
+            role: res.data.role,
+          }),
+        );
+      }),
     );
   }
 
